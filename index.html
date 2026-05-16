@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GSKY – Garuda Wisnu Satria Muda</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <style>
+    :root {
+      --gold: #c8a84b;
+      --gold-light: #e2c97e;
+      --gold-dim: #8a6e2f;
+      --dark-bg: #0d0c09;
+      --dark-card: #161410;
+      --dark-surface: #1c1a14;
+      --dark-border: #2e2a1e;
+      --text-main: #e8dfc8;
+      --text-muted: #9e9070;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-main);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-gwsm {
+      background: rgba(10, 9, 6, 0.97);
+      border-bottom: 1px solid var(--dark-border);
+      padding: 0.55rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.14em;
+      text-decoration: none;
+    }
+    .nav-link-custom {
+      color: var(--text-muted);
+      font-family: 'EB Garamond', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      padding: 0.28rem 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-block;
+    }
+    .nav-link-custom:hover,
+    .nav-link-custom.active {
+      color: var(--gold);
+    }
+
+    /* ── HERO ── */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      min-height: 300px;
+      background:
+        linear-gradient(to bottom, rgba(10,9,6,0.45) 0%, rgba(10,9,6,0.94) 100%),
+        url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1400&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 2.5rem 2rem 2rem;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.85);
+    }
+    .hero-subtitle {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.93rem;
+      margin-top: 0.35rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-dots {
+      margin-top: 0.65rem;
+      display: flex;
+      gap: 0.38rem;
+    }
+    .hero-dots span {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .hero-dots span:nth-child(2) { opacity: 0.55; }
+    .hero-dots span:nth-child(3) { opacity: 0.3; }
+
+    /* ── MAIN CONTENT AREA ── */
+    .content-wrapper {
+      background: var(--dark-bg);
+      padding: 2rem 1.5rem 3rem;
+    }
+    .content-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* ── TENTANG CARD ── */
+    .tentang-card {
+      background: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: 4px;
+      padding: 1.3rem;
+    }
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--gold-dim);
+      margin-top: 0.32rem;
+    }
+
+    /* Poster image box */
+    .poster-wrap {
+      border: 2px solid var(--dark-border);
+      overflow: hidden;
+      border-radius: 3px;
+      position: relative;
+      height: 185px;
+    }
+    .poster-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.78) sepia(15%);
+    }
+    .poster-overlay-text {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      padding: 1.4rem 0.5rem 0.5rem;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      line-height: 1.5;
+    }
+    .poster-red-badge {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      background: rgba(160, 20, 20, 0.85);
+      padding: 0.22rem 0.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      color: #fff;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    /* Description body */
+    .desc-body p {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 0.7rem;
+      line-height: 1.72;
+    }
+
+    /* Feature row */
+    .feature-divider {
+      border-top: 1px solid var(--dark-border);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+    .feat-icon-circle {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.45rem;
+    }
+    .feat-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      color: var(--gold);
+      letter-spacing: 0.09em;
+      margin-bottom: 0.22rem;
+    }
+    .feat-desc {
+      font-size: 0.77rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── INFO SIDEBAR ── */
+    .info-sidebar {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 4px;
+      padding: 1rem 1.1rem;
+      font-size: 0.82rem;
+    }
+    .sidebar-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--dark-border);
+      padding-bottom: 0.48rem;
+      margin-bottom: 0.85rem;
+    }
+    .info-row {
+      display: flex;
+      gap: 0.55rem;
+      margin-bottom: 0.8rem;
+      align-items: flex-start;
+    }
+    .info-row .ri {
+      color: var(--gold-dim);
+      font-size: 0.88rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .info-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.1rem;
+    }
+    .info-value {
+      color: var(--text-muted);
+      font-size: 0.79rem;
+      line-height: 1.48;
+    }
+    .sosmed-wrap {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-top: 0.2rem;
+    }
+    .sosmed-btn {
+      width: 27px; height: 27px;
+      border: 1px solid var(--dark-border);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition: all 0.22s;
+    }
+    .sosmed-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── GALERI KEGIATAN ── */
+    .galeri-section { margin-top: 2.4rem; }
+    .galeri-header {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.1rem;
+    }
+    .galeri-header::before,
+    .galeri-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+    }
+    .galeri-title-text {
+      font-family: 'Cinzel', serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .galeri-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 5px;
+    }
+    .galeri-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 3px;
+      aspect-ratio: 3 / 3.5;
+      border: 1px solid var(--dark-border);
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .galeri-item:hover { border-color: var(--gold-dim); }
+    .galeri-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.42s ease, filter 0.42s ease;
+      filter: brightness(0.8) sepia(12%);
+    }
+    .galeri-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(0.95) sepia(0%);
+    }
+    .galeri-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.42) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark-card);
+      border-top: 1px solid var(--dark-border);
+      text-align: center;
+      padding: 0.8rem;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+    footer a { color: var(--gold-dim); text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 767px) {
+      .galeri-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-section { min-height: 220px; }
+    }
+    @media (max-width: 480px) {
+      .galeri-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar-gwsm d-flex align-items-center justify-content-between">
+  <a class="brand-logo" href="#">GSKY</a>
+  <div>
+    <a href="#" class="nav-link-custom">Home</a>
+    <a href="#" class="nav-link-custom active">Tentang GWSM</a>
+    <a href="#" class="nav-link-custom">Gallery</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero-section">
+  <div>
+    <h1 class="hero-title">GARUDA WISNU SATRIA MUDA</h1>
+    <p class="hero-subtitle">Seni &nbsp;·&nbsp; Budaya &nbsp;·&nbsp; Tradisi &nbsp;·&nbsp; Kebanggaan</p>
+    <div class="hero-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MAIN CONTENT ══ -->
+<div class="content-wrapper">
+  <div class="content-inner">
+
+    <!-- Row: Tentang card + Info sidebar -->
+    <div class="row g-3">
+
+      <!-- LEFT: Tentang card -->
+      <div class="col-lg-8">
+        <div class="tentang-card">
+          <p class="section-label">Tentang GWSM</p>
+
+          <div class="row g-3 mb-0">
+            <!-- Poster -->
+            <div class="col-4 col-sm-4">
+              <div class="poster-wrap">
+                <div class="poster-red-badge"></div>
+                <img
+                  src="firman.jpg"
+                  alt="Berawal Dari Luka"
+                />
+                <div class="poster-overlay-text">
+                  
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-8 col-sm-8 desc-body">
+              <p>Garuda Wisnu Satria Muda (GWSM) adalah paguyuban seni tari dan budaya asal Dusun Pakuwon, Desa Bandonrejo, Kecamatan Tempuran, Kabupaten Magelang, Jawa Tengah.</p>
+              <p>Kelompok ini hadir sebagai wadah pelestarian seni tradisional, khususnya tari reog dan kuda lumping, yang di dalamnya secara bersama-sama untuk memajukan akar nusantara.</p>
+              <p>Melalui pelbagai pertunjukan terbaik, GWSM terus berkomitmen dengan menanamkan panca tradisional dan moralitas kehidupan menjaga semangat pelestarian generasi muda serta mewujudkan kebanggaan lewatnya di dunia digital.</p>
+            </div>
+          </div>
+
+          <!-- Feature blocks -->
+          <div class="feature-divider">
+            <div class="row g-3">
+              <!-- Pelestarian Bahasa -->
+              <div class="col-4">
+                <div class="feat-icon-circle" style="background:#3a2e10;">
+                  <i class="bi bi-shield-fill" style="color:var(--gold-light); font-size:0.8rem;"></i>
+                </div>
+                <p class="feat-title">Pelestarian Bahasa</p>
+                <p class="feat-desc">Kami menjaga nilai-nilai tradisi lokal yang hampir terlupakan dalam era modernisasi.</p>
+              </div>
+              <!-- Kebersamaan -->
+              <div class="col-4">
+                <div class="feat-icon-circle" style="background:#2e3a10;">
+                  <i class="bi bi-people-fill" style="color:#a8c44a; font-size:0.8rem;"></i>
+                </div>
+                <p class="feat-title">Kebersamaan</p>
+                <p class="feat-desc">Membangun rasa saling gotong royong dalam organisasi untuk mencapai visi yang lebih baik.</p>
+              </div>
+              <!-- Edisi & Kreativitas -->
+              <div class="col-4">
+                <div class="feat-icon-circle" style="background:#2e1a10;">
+                  <i class="bi bi-star-fill" style="color:#e2a04a; font-size:0.8rem;"></i>
+                </div>
+                <p class="feat-title">Edisi &amp; Kreativitas</p>
+                <p class="feat-desc">Terus berinovasi dengan karya-karya baru yang tetap berpijak pada tradisi yang kuat.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /col-lg-8 -->
+
+      <!-- RIGHT: Info sidebar -->
+      <div class="col-lg-4">
+        <div class="info-sidebar">
+          <p class="sidebar-title">Informasi Singkat</p>
+
+          <!-- Nama -->
+          <div class="info-row">
+            <i class="bi bi-house-fill ri"></i>
+            <div>
+              <p class="info-label">Nama</p>
+              <p class="info-value">Garuda Wisnu Satria Muda</p>
+            </div>
+          </div>
+
+          <!-- Asal -->
+          <div class="info-row">
+            <i class="bi bi-geo-alt-fill ri"></i>
+            <div>
+              <p class="info-label">Asal</p>
+              <p class="info-value">Dusun Pakuwon, Bandonrejo<br/>Kec. Tempuran, Kab. Magelang<br/>Jawa Tengah</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="info-row">
+            <i class="bi bi-envelope-fill ri"></i>
+            <div>
+              <p class="info-label">Email</p>
+              <p class="info-value">garudawisnusatriamuda@gmail.com</p>
+            </div>
+          </div>
+
+          <!-- Kontak -->
+          <div class="info-row">
+            <i class="bi bi-telephone-fill ri"></i>
+            <div>
+              <p class="info-label">Kontak</p>
+              <p class="info-value" style="color:var(--gold-dim); cursor:pointer;">Lihat Kontak</p>
+            </div>
+          </div>
+
+          <!-- Sosmed -->
+          <div class="info-row">
+            <i class="bi bi-share-fill ri"></i>
+            <div>
+              <p class="info-label">Media Sosial</p>
+              <div class="sosmed-wrap">
+                <a href="#" class="sosmed-btn"><i class="bi bi-youtube"></i></a>
+                <a href="#" class="sosmed-btn"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="sosmed-btn"><i class="bi bi-tiktok"></i></a>
+                <a href="#" class="sosmed-btn"><i class="bi bi-facebook"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /col-lg-4 -->
+    </div><!-- /row -->
+
+    <!-- ══ GALERI KEGIATAN ══ -->
+    <div class="galeri-section">
+      <div class="galeri-header">
+        <span class="galeri-title-text">✦ &nbsp;Galeri Kegiatan&nbsp; ✦</span>
+      </div>
+
+      <div class="galeri-grid">
+        <div class="galeri-item">
+          <img src="1.jpg" alt="Kegiatan 1"/>
+        </div>
+        <div class="galeri-item">
+          <img src="2.jpg" alt="Kegiatan 2"/>
+        </div>
+        <div class="galeri-item">
+          <img src="3.jpg" alt="Kegiatan 3"/>
+        </div>
+        <div class="galeri-item">
+          <img src="4.jpg" alt="Kegiatan 4"/>
+        </div>
+        <div class="galeri-item">
+          <img src="5.jpg" alt="Kegiatan 5"/>
+        </div>
+        <div class="galeri-item">
+          <img src="6.jpg" alt="Kegiatan 6"/>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-inner -->
+</div><!-- /content-wrapper -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  © 2024 Garuda Wisnu Satria Muda &nbsp;·&nbsp;
+  <a href="#">Tempuran, Magelang, Jawa Tengah</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Fade-in on load
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.55s ease';
+  window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+  });
+</script>
+</body>
+</html>
